@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Processo Seletivo | Desenvolvedor Front-End</title>
+
+  <!-- Tailwind CSS via CDN para estilização corporativa de alta performance -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonte Inter (Padrão de mercado para produtos digitais SaaS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+
+  <main class="max-w-3xl mx-auto bg-slate-800 rounded-2xl shadow-2xl border border-slate-700/60 overflow-hidden">
+    
+    <!-- Barra de Progresso Superior -->
+    <div class="w-full bg-slate-700 h-2">
+      <div id="progressBar" class="bg-indigo-500 h-2 w-0 transition-all duration-300"></div>
+    </div>
+
+    <!-- Cabeçalho do Formulário -->
+    <header class="p-8 border-b border-slate-700/60 bg-slate-800/50">
+      <div class="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-400 font-medium text-xs rounded-full mb-3 border border-indigo-500/20">
+        Recrutamento & Seleção
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight text-white">Formulário de Avaliação Técnica</h1>
+      <p class="text-slate-400 text-sm mt-2">
+        Preencha os campos abaixo para concluir sua candidatura à vaga de <span class="text-indigo-400 font-semibold">Desenvolvedor(a) Front-End</span>.
+      </p>
+    </header>
+
+    <!-- Formulário Principal -->
+    <form id="enterpriseForm" action="https://api.web3forms.com/submit" method="POST" class="p-8 space-y-8">
+      
+      <!-- Chave Web3Forms -->
+      <input type="hidden" name="access_key" value="762ed083-25b2-4011-9c78-988847f5b9aa" />
+
+      <!-- Bloco 1: Conhecimentos Técnicos -->
+      <section class="space-y-4">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">01. Perfil Técnico</h2>
+        
+        <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700/40">
+          <label class="block text-sm font-medium text-slate-200 mb-3">
+            1. Quais diferenciais técnicos você agrega à equipe?
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+              <input type="checkbox" name="diferencial" value="Power BI" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700 focus:ring-indigo-500">
+              <span class="text-sm font-medium text-slate-300">Power BI</span>
+            </label>
+            <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+              <input type="checkbox" name="diferencial" value="Cobol" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700 focus:ring-indigo-500">
+              <span class="text-sm font-medium text-slate-300">Cobol</span>
+            </label>
+            <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+              <input type="checkbox" name="diferencial" value="Python" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700 focus:ring-indigo-500">
+              <span class="text-sm font-medium text-slate-300">Python</span>
+            </label>
+            <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+              <input type="checkbox" name="diferencial" value="SQL" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700 focus:ring-indigo-500">
+              <span class="text-sm font-medium text-slate-300">SQL Database</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Questão Dinâmica (Linguagem) -->
+        <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700/40 space-y-4">
+          <div>
+            <label for="programacao" class="block text-sm font-medium text-slate-200 mb-2">
+              2. Qual linguagem de programação você domina ou utiliza profissionalmente?
+            </label>
+            <input type="text" id="programacao" name="programacao" placeholder="Ex: Python, JavaScript, Java..." 
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" />
+          </div>
+
+          <!-- Pergunta Condicional Oculta (Python) -->
+          <div id="campoTempoPython" class="hidden fade-in p-4 bg-indigo-950/40 border border-indigo-500/30 rounded-lg">
+            <label for="tempoPython" class="block text-sm font-medium text-indigo-300 mb-2">
+              Há quanto tempo você atua com ecossistema Python?
+            </label>
+            <input type="text" id="tempoPython" name="tempo_experiencia_python" placeholder="Ex: 2 anos, 6 meses..." 
+              class="w-full px-4 py-2 bg-slate-900 border border-indigo-500/40 rounded-md text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Bloco 2: Perfil Comportamental -->
+      <section class="space-y-4">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">02. Cultura e Motivação</h2>
+        
+        <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700/40 space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-200 mb-3">
+              3. Principais pilares de trabalho (Selecione os aplicáveis):
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="checkbox" name="motivo_contratacao" value="Pontualidade" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700">
+                <span class="text-sm font-medium text-slate-300">Pontualidade & Compromisso</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="checkbox" name="motivo_contratacao" value="Proatividade" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700">
+                <span class="text-sm font-medium text-slate-300">Proatividade Constante</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="checkbox" name="motivo_contratacao" value="Flexibilidade" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700">
+                <span class="text-sm font-medium text-slate-300">Disponibilidade de Horários</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 bg-slate-800 rounded-lg border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="checkbox" name="motivo_contratacao" value="Desafios" class="form-checkbox text-indigo-600 rounded bg-slate-900 border-slate-700">
+                <span class="text-sm font-medium text-slate-300">Orientação a Desafios</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="qualidade" class="block text-sm font-medium text-slate-200 mb-2">
+              4. Qual sua maior fortaleza profissional?
+            </label>
+            <input type="text" id="qualidade" name="qualidade_principal" placeholder="Sua resposta..." 
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+
+          <div>
+            <label for="definicao" class="block text-sm font-medium text-slate-200 mb-2">
+              5. Uma palavra que define sua postura de trabalho:
+            </label>
+            <input type="text" id="definicao" name="palavra_definicao" placeholder="Ex: Resiliência, Inovação..." 
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Bloco 3: Informações Logísticas -->
+      <section class="space-y-4">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-indigo-400">03. Disponibilidade & Logística</h2>
+        
+        <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700/40 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="horarios" class="block text-sm font-medium text-slate-200 mb-2">Horários disponíveis para início</label>
+              <input type="text" id="horarios" name="horarios_disponiveis" placeholder="Ex: Comercial, Noturno..." 
+                class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
+
+            <div>
+              <label for="viajar" class="block text-sm font-medium text-slate-200 mb-2">Possui disponibilidade para viagens?</label>
+              <select id="viajar" name="disponibilidade_viagem" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim, total disponibilidade</option>
+                <option value="Apenas regionais">Apenas viagens curtas/regionais</option>
+                <option value="Não">Não possuo disponibilidade</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="filhosSelect" class="block text-sm font-medium text-slate-200 mb-2">Possui dependentes/filhos?</label>
+              <select id="filhosSelect" name="possuo_filhos" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="Nao" selected>Não</option>
+                <option value="Sim">Sim</option>
+              </select>
+            </div>
+
+            <!-- Condicional Filhos -->
+            <div id="campoQtdFilhos" class="hidden fade-in">
+              <label for="qtdFilhos" class="block text-sm font-medium text-slate-200 mb-2">Quantidade de dependentes</label>
+              <input type="number" id="qtdFilhos" name="quantidade_filhos" placeholder="0" min="1" 
+                class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botão de Submissão Profissional -->
+      <div class="pt-4">
+        <button type="submit" class="w-full py-4 px-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition duration-200 transform active:scale-[0.99] flex items-center justify-center space-x-2">
+          <span>Concluir e Enviar Candidatura</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('enterpriseForm');
+      const inputProgramacao = document.getElementById('programacao');
+      const campoTempoPython = document.getElementById('campoTempoPython');
+      const filhosSelect = document.getElementById('filhosSelect');
+      const campoQtdFilhos = document.getElementById('campoQtdFilhos');
+      const progressBar = document.getElementById('progressBar');
+
+      // 1. Condicional para Linguagem Python
+      function checarLinguagem() {
+        const val = inputProgramacao.value.toLowerCase().trim();
+        if (val.includes('python') || val.includes('pyton')) {
+          campoTempoPython.classList.remove('hidden');
+        } else {
+          campoTempoPython.classList.add('hidden');
+        }
+      }
+
+      inputProgramacao.addEventListener('input', checarLinguagem);
+
+      // 2. Condicional para Dependente/Filhos
+      filhosSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'Sim') {
+          campoQtdFilhos.classList.remove('hidden');
+        } else {
+          campoQtdFilhos.classList.add('hidden');
+        }
+      });
+
+      // 3. Atualização Dinâmica da Barra de Progresso
+      function atualizarProgresso() {
+        const inputs = form.querySelectorAll('input:not([type="hidden"]), select');
+        let preenchidos = 0;
+
+        inputs.forEach(input => {
+          if (input.type === 'checkbox') {
+            // Conta se pelo menos um do grupo estiver checado
+            const name = input.name;
+            if (form.querySelectorAll(`input[name="${name}"]:checked`).length > 0) preenchidos++;
+          } else if (input.value.trim() !== '') {
+            preenchidos++;
+          }
+        });
+
+        const percentual = Math.min(Math.round((preenchidos / (inputs.length - 3)) * 100), 100);
+        progressBar.style.width = `${percentual}%`;
+      }
+
+      form.addEventListener('input', atualizarProgresso);
+      form.addEventListener('change', atualizarProgresso);
+    });
+  </script>
+</body>
+</html>
